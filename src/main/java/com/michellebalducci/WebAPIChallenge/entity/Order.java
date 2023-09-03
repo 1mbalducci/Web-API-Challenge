@@ -18,7 +18,7 @@ public class Order {
     @Column
     private Date dateOfOrder;
     @Column
-    private int PointsEarnedForOrder;
+    private static int pointsEarnedForOrder;
 
     public Order(){};
 
@@ -29,8 +29,13 @@ public class Order {
     }
 
         public static void CalculatePointsPerOrder(double totalAmount){
-
-        };
+                if (totalAmount>100){
+                    pointsEarnedForOrder+= ((totalAmount-100)*2)+50;
+                }
+                if (totalAmount>50 && totalAmount<=100){
+                    pointsEarnedForOrder+= (totalAmount-50)*1;
+                }
+                };
 
 
     public int getCustomerId() {
@@ -55,11 +60,11 @@ public class Order {
     }
 
     public int getPointsEarnedForOrder() {
-        return PointsEarnedForOrder;
+        return pointsEarnedForOrder;
     }
 
     public void setPointsEarnedForOrder(int pointsEarnedForOrder) {
-        PointsEarnedForOrder = pointsEarnedForOrder;
+        pointsEarnedForOrder = pointsEarnedForOrder;
     }
 
     @Override
@@ -67,11 +72,11 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return customerId == order.customerId && Double.compare(order.totalAmount, totalAmount) == 0 && PointsEarnedForOrder == order.PointsEarnedForOrder && Objects.equals(dateOfOrder, order.dateOfOrder);
+        return customerId == order.customerId && Double.compare(order.totalAmount, totalAmount) == 0 && pointsEarnedForOrder == order.pointsEarnedForOrder && Objects.equals(dateOfOrder, order.dateOfOrder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, totalAmount, dateOfOrder, PointsEarnedForOrder);
+        return Objects.hash(customerId, totalAmount, dateOfOrder, pointsEarnedForOrder);
     }
 }
