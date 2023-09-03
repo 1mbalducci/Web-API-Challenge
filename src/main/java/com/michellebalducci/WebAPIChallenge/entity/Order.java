@@ -19,7 +19,7 @@ public class Order {
     @Column
     private String dateOfOrder;
     @Column
-    private static int pointsEarnedForOrder;
+    private  int pointsEarnedForOrder;
 
     public Order(){};
 
@@ -29,14 +29,19 @@ public class Order {
         this.dateOfOrder = dateOfOrder;
     }
 
-        public static void CalculatePointsPerOrder(double totalAmount){
-                if (totalAmount>100){
-                    pointsEarnedForOrder+= ((totalAmount-100)*2)+50;
-                }
-                if (totalAmount>50 && totalAmount<=100){
-                    pointsEarnedForOrder+= (totalAmount-50)*1;
-                }
-                };
+    public Order( double totalAmount, String dateOfOrder) {
+        this.totalAmount = totalAmount;
+        this.dateOfOrder = dateOfOrder;
+    }
+
+//        public static void CalculatePointsPerOrder(double totalAmount){
+//                if (totalAmount>100){
+//                    pointsEarnedForOrder+= ((totalAmount-100)*2)+50;
+//                }
+//                if (totalAmount>50 && totalAmount<=100){
+//                    pointsEarnedForOrder+= (totalAmount-50)*1;
+//                }
+//                };
 
 
     public int getCustomerId() {
@@ -60,12 +65,19 @@ public class Order {
         this.dateOfOrder = dateOfOrder;
     }
 
-    public int getPointsEarnedForOrder() {
+    public  int getPointsEarnedForOrder() {
         return pointsEarnedForOrder;
     }
 
-    public void setPointsEarnedForOrder(int pointsEarnedForOrder) {
-        pointsEarnedForOrder = pointsEarnedForOrder;
+    public  void setPointsEarnedForOrder(double totalAmount){
+        if (totalAmount>100){
+            this.pointsEarnedForOrder+= ((totalAmount-100)*2)+50;
+        }
+        if (totalAmount>50 && totalAmount<=100){
+            this. pointsEarnedForOrder+= (totalAmount-50)*1;
+        }
+
+        this.pointsEarnedForOrder= pointsEarnedForOrder;
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import static com.michellebalducci.WebAPIChallenge.entity.Customer.CalculatePointsPerMonth;
-import static com.michellebalducci.WebAPIChallenge.entity.Order.CalculatePointsPerOrder;
+//import static com.michellebalducci.WebAPIChallenge.entity.Order.CalculatePointsPerOrder;
 
 public class TestingFunctions {
     public static void main (String[] args){
@@ -21,11 +21,11 @@ public class TestingFunctions {
 
         char[] chars= order1.getDateOfOrder().toCharArray();
         System.out.println(chars[1]);
-        CalculatePointsPerOrder(order1.getTotalAmount());
-        System.out.println(order1.getPointsEarnedForOrder());
-
-        CalculatePointsPerOrder(order2.getTotalAmount());
-        System.out.println(order2.getPointsEarnedForOrder());
+//        CalculatePointsPerOrder(order1.getTotalAmount());
+//        System.out.println(order1.getpointsEarnedForOrder());
+//
+//        CalculatePointsPerOrder(order2.getTotalAmount());
+//        System.out.println(order2.getpointsEarnedForOrder());
 
         arrOrders.add(order1);
         arrOrders.add(order2);

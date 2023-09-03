@@ -17,13 +17,13 @@ public class Customer {
     @Column
     ArrayList<Order> orders;
     @Column
-    private static int totalPointsEarned;
+    private static int totalPointsEarned=0;
     @Column
-    private static int pointsEarnedJan;
+    private static int pointsEarnedJan=0;
     @Column
-    private static int pointsEarnedFeb;
+    private static int pointsEarnedFeb=0;
     @Column
-    private static int pointsEarnedMar;
+    private static int pointsEarnedMar=0;
 
     public Customer(){};
     public Customer(String lastName, String firstName) {
