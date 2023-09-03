@@ -55,7 +55,7 @@ public class Customer {
     };
 
     public static void CalculatePointsPerMonth(ArrayList<Order> orders) {
-        //Order order1= new Order(c1.getCustomerID(), 500.00, new SimpleDateFormat("01-02-2022"));
+
         for (Order order : orders) {
            char[] chars= order.getDateOfOrder().toCharArray();
             if (chars[1] == 1) {
