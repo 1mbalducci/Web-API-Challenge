@@ -1,6 +1,7 @@
 package com.michellebalducci.WebAPIChallenge.entity;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 @Entity
@@ -16,16 +17,19 @@ public class Customer {
     @Column
     ArrayList<Order> orders;
     @Column
-    private int totalPointsEarned;
+    private static int totalPointsEarned;
     @Column
-    private int pointsEarnedJan;
+    private static int pointsEarnedJan;
     @Column
-    private int pointsEarnedFeb;
+    private static int pointsEarnedFeb;
     @Column
-    private int pointsEarnedMar;
+    private static int pointsEarnedMar;
 
     public Customer(){};
-
+    public Customer(String lastName, String firstName) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
     public Customer(String lastName, String firstName, ArrayList<Order> orders) {
         this.lastName = lastName;
         this.firstName = firstName;
@@ -44,9 +48,22 @@ public class Customer {
         this.pointsEarnedMar = pointsEarnedMar;
     }
 
-    public static void CalculateTotalPoints(ArrayList<Order> orders){};
+    public static void CalculateTotalPoints(ArrayList<Order> orders){
+        for (Order order: orders) {
+            totalPointsEarned+= order.getPointsEarnedForOrder();
+        }
+    };
 
-    public static void CalculatePointsPerMonth(ArrayList<Order> orders){};
+    public static void CalculatePointsPerMonth(ArrayList<Order> orders) {
+        //Order order1= new Order(c1.getCustomerID(), 500.00, new SimpleDateFormat("01-02-2022"));
+        for (Order order : orders) {
+           char[] chars= order.getDateOfOrder().toCharArray();
+            if (chars[1] == 1) {
+                pointsEarnedJan+=order.getPointsEarnedForOrder();
+            }
+        }
+        ;
+    }
 
 
     public String getLastName() {

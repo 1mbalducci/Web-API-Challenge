@@ -1,6 +1,7 @@
 package com.michellebalducci.WebAPIChallenge.entity;
 
 import javax.persistence.*;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,13 +17,13 @@ public class Order {
     @Column
     private double totalAmount;
     @Column
-    private Date dateOfOrder;
+    private String dateOfOrder;
     @Column
     private static int pointsEarnedForOrder;
 
     public Order(){};
 
-    public Order(int customerId, double totalAmount, Date dateOfOrder) {
+    public Order(int customerId, double totalAmount, String dateOfOrder) {
         this.customerId = customerId;
         this.totalAmount = totalAmount;
         this.dateOfOrder = dateOfOrder;
@@ -51,11 +52,11 @@ public class Order {
         this.totalAmount = totalAmount;
     }
 
-    public Date getDateOfOrder() {
+    public String getDateOfOrder() {
         return dateOfOrder;
     }
 
-    public void setDateOfOrder(Date dateOfOrder) {
+    public void setDateOfOrder(String dateOfOrder) {
         this.dateOfOrder = dateOfOrder;
     }
 
