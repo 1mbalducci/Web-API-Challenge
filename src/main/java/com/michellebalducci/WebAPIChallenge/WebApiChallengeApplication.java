@@ -9,7 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.michellebalducci.WebAPIChallenge.entity.Customer.CalculatePointsPerMonth;
 //import static com.michellebalducci.WebAPIChallenge.entity.Order.CalculatePointsPerOrder;
@@ -39,7 +42,9 @@ public class WebApiChallengeApplication implements CommandLineRunner {
 		customerRepository.save(c2);
 		customerRepository.save(c3);
 
-		Order order1= new Order(c1.getCustomerID(), 500.00, "01-02-2022");
+		Calendar date1= Calendar.getInstance();
+		date1.set(2023,Calendar.JANUARY,15);
+		Order order1= new Order(c1.getCustomerID(), 500.00, date1);
 		Order order2= new Order(c1.getCustomerID(), 55.00, "01-03-2022");
 //		Order order3= new Order(c1.getCustomerID(), 75.00, "02-15-2022");
 //		Order order4= new Order(c1.getCustomerID(), 55.00, "02-20-2022");

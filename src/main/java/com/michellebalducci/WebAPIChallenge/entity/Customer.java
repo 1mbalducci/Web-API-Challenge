@@ -14,7 +14,7 @@ public class Customer {
     private  String lastName;
     @Column
     private String firstName;
-    @Column
+    @OneToMany
     ArrayList<Order> orders;
     @Column
     private static int totalPointsEarned=0;
