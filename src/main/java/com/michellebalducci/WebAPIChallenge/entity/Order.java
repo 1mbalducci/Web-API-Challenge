@@ -19,8 +19,7 @@ public class Order {
     private double totalAmount;
     @Column
     private Calendar dateOfOrder;
-    @Column
-    private  int pointsEarnedForOrder;
+
 
     public Order(){};
 
@@ -66,31 +65,20 @@ public class Order {
         this.dateOfOrder = dateOfOrder;
     }
 
-    public  int getPointsEarnedForOrder() {
-        return pointsEarnedForOrder;
-    }
 
-    public  void setPointsEarnedForOrder(double totalAmount){
-        if (totalAmount>100){
-            this.pointsEarnedForOrder+= ((totalAmount-100)*2)+50;
-        }
-        if (totalAmount>50 && totalAmount<=100){
-            this. pointsEarnedForOrder+= (totalAmount-50)*1;
-        }
 
-        this.pointsEarnedForOrder= pointsEarnedForOrder;
-    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return customerId == order.customerId && Double.compare(order.totalAmount, totalAmount) == 0 && pointsEarnedForOrder == order.pointsEarnedForOrder && Objects.equals(dateOfOrder, order.dateOfOrder);
+        return customerId == order.customerId && Double.compare(order.totalAmount, totalAmount) == 0  && Objects.equals(dateOfOrder, order.dateOfOrder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, totalAmount, dateOfOrder, pointsEarnedForOrder);
+        return Objects.hash(customerId, totalAmount, dateOfOrder);
     }
 }

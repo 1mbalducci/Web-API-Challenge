@@ -85,27 +85,27 @@ public class WebApiChallengeApplication implements CommandLineRunner {
 		date20.set(2023,Calendar.MARCH,22);
 
 		Order order1= new Order(c1.getCustomerID(), 500.00, date1);
-		Order order2= new Order(c1.getCustomerID(), 55.00, date2);
+		Order order2= new Order(c1.getCustomerID(), 55.23, date2);
 		Order order3= new Order(c1.getCustomerID(), 75.00, date3);
-		Order order4= new Order(c1.getCustomerID(), 90.00, date4);
-		Order order5= new Order(c1.getCustomerID(), 4.00, date5);
-		Order order6= new Order(c1.getCustomerID(), 234.00, date6);
-		Order order7= new Order(c1.getCustomerID(), 278.00, date7);
-		Order order8= new Order(c1.getCustomerID(), 15.00, date8);
+		Order order4= new Order(c1.getCustomerID(), 90.58, date4);
+		Order order5= new Order(c1.getCustomerID(), 4.25, date5);
+		Order order6= new Order(c1.getCustomerID(), 234.25, date6);
+		Order order7= new Order(c1.getCustomerID(), 278.58, date7);
+		Order order8= new Order(c1.getCustomerID(), 15.69, date8);
 
-		Order order9= new Order(c2.getCustomerID(), 1000.00, date9);
-		Order order10= new Order(c2.getCustomerID(), 63.00, date10);
-		Order order11= new Order(c2.getCustomerID(), 7.00, date11);
-		Order order12= new Order(c2.getCustomerID(), 3.00, date12);
-		Order order13= new Order(c2.getCustomerID(), 347.00, date13);
-		Order order14= new Order(c2.getCustomerID(), 86.00, date14);
+		Order order9= new Order(c2.getCustomerID(), 1000.25, date9);
+		Order order10= new Order(c2.getCustomerID(), 63.33, date10);
+		Order order11= new Order(c2.getCustomerID(), 7.77, date11);
+		Order order12= new Order(c2.getCustomerID(), 3.35, date12);
+		Order order13= new Order(c2.getCustomerID(), 345.10, date13);
+		Order order14= new Order(c2.getCustomerID(), 86.60, date14);
 
-		Order order15= new Order(c3.getCustomerID(), 49.00, date15);
-		Order order16= new Order(c3.getCustomerID(), 446.00, date16);
-		Order order17= new Order(c3.getCustomerID(), 94.00, date17);
+		Order order15= new Order(c3.getCustomerID(), 49.90, date15);
+		Order order16= new Order(c3.getCustomerID(), 446.22, date16);
+		Order order17= new Order(c3.getCustomerID(), 94.48, date17);
 		Order order18= new Order(c3.getCustomerID(), 79.00, date18);
-		Order order19= new Order(c3.getCustomerID(), 273.00, date19);
-		Order order20= new Order(c3.getCustomerID(), 116.00, date20);
+		Order order19= new Order(c3.getCustomerID(), 273.93, date19);
+		Order order20= new Order(c3.getCustomerID(), 116.47, date20);
 
 		orderRepository.save(order1);
 		orderRepository.save(order2);
@@ -128,8 +128,8 @@ public class WebApiChallengeApplication implements CommandLineRunner {
 		orderRepository.save(order19);
 		orderRepository.save(order20);
 
-		order1.setPointsEarnedForOrder(order1.getTotalAmount());
-		System.out.println(order1.getPointsEarnedForOrder());
+//		order1.setPointsEarnedForOrder(order1.getTotalAmount());
+//		System.out.println(order1.getPointsEarnedForOrder());
 
 //		CalculatePointsPerOrder(order2.getTotalAmount());
 //		System.out.println(order2.getPointsEarnedForOrder());
@@ -153,7 +153,7 @@ public class WebApiChallengeApplication implements CommandLineRunner {
 //		arrOrders.add(order5);
 //		arrOrders.add(order6);
 
-		c1.setOrders(arrOrders);
+//		c1.setOrders(arrOrders);
 //		calculatePointsPerMonth(c1.getOrders());
 //		System.out.println(c1.getPointsEarnedJan());
 	}

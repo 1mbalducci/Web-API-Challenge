@@ -14,7 +14,7 @@ public class Customer {
     private  String lastName;
     @Column
     private String firstName;
-    @OneToMany
+//    @OneToMany
     ArrayList<Order> orders;
 
 
