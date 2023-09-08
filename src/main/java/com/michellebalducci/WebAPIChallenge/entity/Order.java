@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name= "orders_table")
@@ -14,7 +15,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
     @Column
-    private int customerId;
+    private UUID customerId;
     @Column
     private double totalAmount;
     @Column
@@ -23,7 +24,7 @@ public class Order {
 
     public Order(){};
 
-    public Order(int customerId, double totalAmount, Calendar dateOfOrder) {
+    public Order(UUID customerId, double totalAmount, Calendar dateOfOrder) {
         this.customerId = customerId;
         this.totalAmount = totalAmount;
         this.dateOfOrder = dateOfOrder;
@@ -44,7 +45,7 @@ public class Order {
 //                };
 
 
-    public int getCustomerId() {
+    public UUID getCustomerId() {
         return customerId;
     }
 

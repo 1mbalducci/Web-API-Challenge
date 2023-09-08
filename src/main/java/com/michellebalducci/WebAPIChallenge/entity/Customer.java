@@ -3,13 +3,14 @@ package com.michellebalducci.WebAPIChallenge.entity;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Entity
-@Table(name="customers")
+@Table(name="customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerID;
+    private UUID customerID;
     @Column
     private  String lastName;
     @Column
@@ -59,7 +60,7 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public int getCustomerID() {
+    public UUID getCustomerID() {
         return customerID;
     }
 
