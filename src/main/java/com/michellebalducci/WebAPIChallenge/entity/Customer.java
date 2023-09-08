@@ -16,14 +16,7 @@ public class Customer {
     private String firstName;
     @OneToMany
     ArrayList<Order> orders;
-    @Column
-    private static int totalPointsEarned=0;
-    @Column
-    private static int pointsEarnedJan=0;
-    @Column
-    private static int pointsEarnedFeb=0;
-    @Column
-    private static int pointsEarnedMar=0;
+
 
     public Customer(){};
     public Customer(String lastName, String firstName) {
@@ -42,28 +35,12 @@ public class Customer {
         this.lastName = lastName;
         this.firstName = firstName;
         this.orders = orders;
-        this.totalPointsEarned = totalPointsEarned;
-        this.pointsEarnedJan = pointsEarnedJan;
-        this.pointsEarnedFeb = pointsEarnedFeb;
-        this.pointsEarnedMar = pointsEarnedMar;
+
     }
 
-    public static void CalculateTotalPoints(ArrayList<Order> orders){
-        for (Order order: orders) {
-            totalPointsEarned+= order.getPointsEarnedForOrder();
-        }
-    };
 
-    public static void CalculatePointsPerMonth(ArrayList<Order> orders) {
 
-        for (Order order : orders) {
-           char[] chars= order.getDateOfOrder().toCharArray();
-            if (chars[1] == 1) {
-                pointsEarnedJan+=order.getPointsEarnedForOrder();
-            }
-        }
-        ;
-    }
+
 
 
     public String getLastName() {
@@ -94,35 +71,5 @@ public class Customer {
         this.orders = orders;
     }
 
-    public int getTotalPointsEarned() {
-        return totalPointsEarned;
-    }
 
-    public void setTotalPointsEarned(int totalPointsEarned) {
-        this.totalPointsEarned = totalPointsEarned;
-    }
-
-    public int getPointsEarnedJan() {
-        return pointsEarnedJan;
-    }
-
-    public void setPointsEarnedJan(int pointsEarnedJan) {
-        this.pointsEarnedJan = pointsEarnedJan;
-    }
-
-    public int getPointsEarnedFeb() {
-        return pointsEarnedFeb;
-    }
-
-    public void setPointsEarnedFeb(int pointsEarnedFeb) {
-        this.pointsEarnedFeb = pointsEarnedFeb;
-    }
-
-    public int getPointsEarnedMar() {
-        return pointsEarnedMar;
-    }
-
-    public void setPointsEarnedMar(int pointsEarnedMar) {
-        this.pointsEarnedMar = pointsEarnedMar;
-    }
 }

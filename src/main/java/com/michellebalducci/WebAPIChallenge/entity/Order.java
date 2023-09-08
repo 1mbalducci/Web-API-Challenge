@@ -12,7 +12,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int order_id;
+    private int orderId;
     @Column
     private int customerId;
     @Column
@@ -30,12 +30,12 @@ public class Order {
         this.dateOfOrder = dateOfOrder;
     }
 
-    public Order( double totalAmount, Date dateOfOrder) {
+    public Order( double totalAmount, Calendar dateOfOrder) {
         this.totalAmount = totalAmount;
         this.dateOfOrder = dateOfOrder;
     }
 
-//        public static void CalculatePointsPerOrder(double totalAmount){
+//        public static void calculatePointsPerOrder(double totalAmount){
 //                if (totalAmount>100){
 //                    pointsEarnedForOrder+= ((totalAmount-100)*2)+50;
 //                }
@@ -58,11 +58,11 @@ public class Order {
         this.totalAmount = totalAmount;
     }
 
-    public Date getDateOfOrder() {
+    public Calendar getDateOfOrder() {
         return dateOfOrder;
     }
 
-    public void setDateOfOrder(String dateOfOrder) {
+    public void setDateOfOrder(Calendar dateOfOrder) {
         this.dateOfOrder = dateOfOrder;
     }
 
