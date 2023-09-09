@@ -15,7 +15,7 @@ public interface RewardsService {
     Optional<Customer> getByIdCustomer(UUID id);
     Optional <Order> getByIdOrder(UUID id);
 
-    List<Customer> findByName(@NotNull String firstName, @NotNull String lastName);
+//    List<Customer> findByName(@NotNull String firstName, @NotNull String lastName);
 
 
 }

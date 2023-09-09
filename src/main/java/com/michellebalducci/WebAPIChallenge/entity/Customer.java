@@ -3,6 +3,7 @@ package com.michellebalducci.WebAPIChallenge.entity;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -10,7 +11,7 @@ import java.util.UUID;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID customerID;
+    private UUID customerId;
     @Column
     private  String lastName;
     @Column
@@ -61,7 +62,7 @@ public class Customer {
     }
 
     public UUID getCustomerID() {
-        return customerID;
+        return customerId;
     }
 
     public ArrayList<Order> getOrders() {
@@ -72,5 +73,16 @@ public class Customer {
         this.orders = orders;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(lastName, customer.lastName) && Objects.equals(firstName, customer.firstName) && Objects.equals(orders, customer.orders);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(lastName, firstName, orders);
+    }
 }
