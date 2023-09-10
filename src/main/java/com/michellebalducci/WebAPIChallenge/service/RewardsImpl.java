@@ -6,12 +6,9 @@ import com.michellebalducci.WebAPIChallenge.repository.CustomerRepository;
 import com.michellebalducci.WebAPIChallenge.repository.OrderRepository;
 import com.sun.istack.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
-public class RewardsImpl implements RewardsService{
+public class RewardsImpl implements RewardsService {
     //private static final Logger LOG = LoggerFactory.getLogger(RewardsImpl.class);
     private final CustomerRepository customerRepository;
     private final OrderRepository orderRepository;
@@ -24,11 +21,16 @@ public class RewardsImpl implements RewardsService{
     @Override
     public Optional<Customer> getByIdCustomer(@NotNull UUID id) {
         return customerRepository.findById(id);
-        }
+    }
 
     @Override
     public Optional<Order> getByIdOrder(@NotNull UUID id) {
         return orderRepository.findById(id);
+    }
+
+    @Override
+    public List<Order> findAllOrders() {
+        return orderRepository.findAll();
     }
 
 //    @Override
@@ -38,34 +40,83 @@ public class RewardsImpl implements RewardsService{
 //        return customerRepository.findBy(customerFirstName, customerLastName);
 //    }
 
-//    private String lastName;
-//    private String firstName;
-//    private UUID customerId;
-//    private int totalPointsPerCustomer;
-//    private int customerPointsEarnedJan;
-//    private int customerPointsEarnedFeb;
-//    private int customerPointsEarnedMar;
 
-    public  void pointsEarnedForOrder(double totalAmount){
-        int pointsEarnedForOrder=0;
-        if (totalAmount>100){
-            pointsEarnedForOrder+= ((totalAmount-100)*2)+50;
+
+    public static int pointsEarnedForOrder(double totalAmount) {
+        int pointsEarnedForOrder = 0;
+        if (totalAmount > 100) {
+            pointsEarnedForOrder += ((totalAmount - 100) * 2) + 50;
         }
-        if (totalAmount>50 && totalAmount<=100){
-            pointsEarnedForOrder+= (totalAmount-50)*1;
+        if (totalAmount > 50 && totalAmount <= 100) {
+            pointsEarnedForOrder += (totalAmount - 50) * 1;
         }
+        return pointsEarnedForOrder;
     }
 
-    public static void calculateTotalPoints(List<Order> orders){
-        int totalPointsEarned=0;
-        for (Order order: orders) {
-//            totalPointsEarned+= order.getPointsEarnedForOrder();
+    public static int calculateTotalPointsPerCustomer(List<Order> orders, Customer customer) {
+        int totalPointsEarned = 0;
+        for (Order order : orders) {
+            if (order.getCustomerId() == customer.getCustomerID()) {
+                totalPointsEarned += pointsEarnedForOrder(order.getTotalAmount());
+            }
+
         }
-    };
+        return totalPointsEarned;
+    }
 
-    public static void calculatePointsPerMonth(ArrayList<Order> orders) {
+    public static int calculatePointsJanuary(List<Order> orders, Customer customer) {
+        Calendar startDate = Calendar.getInstance();
+        Calendar endDate = Calendar.getInstance();
+        startDate.set(2022, Calendar.JANUARY, 1);
+        endDate.set(2022, Calendar.FEBRUARY, 1);
+        int customerPointsEarnedJan = 0;
+        for (Order order : orders) {
+            if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
+                    || order.getDateOfOrder().equals(startDate)) {
+                customerPointsEarnedJan += pointsEarnedForOrder(order.getTotalAmount());
+            }
 
-    };
+        }
+        return customerPointsEarnedJan;
+
+    }
+
+    ;
+
+    public static int calculatePointsFebruary(List<Order> orders, Customer customer) {
+        Calendar startDate = Calendar.getInstance();
+        Calendar endDate = Calendar.getInstance();
+        startDate.set(2022, Calendar.FEBRUARY, 1);
+        endDate.set(2022, Calendar.MARCH, 1);
+        int customerPointsEarnedFeb = 0;
+        for (Order order : orders) {
+            if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
+                    || order.getDateOfOrder().equals(startDate)) {
+                customerPointsEarnedFeb += pointsEarnedForOrder(order.getTotalAmount());
+            }
+
+        }
+        return customerPointsEarnedFeb;
+
+    }
+
+    ;
+
+    public static int calculatePointsMarch(List<Order> orders, Customer customer) {
+        Calendar startDate = Calendar.getInstance();
+        Calendar endDate = Calendar.getInstance();
+        startDate.set(2022, Calendar.MARCH, 1);
+        endDate.set(2022, Calendar.FEBRUARY, 1);
+        int customerPointsEarnedFeb = 0;
+        for (Order order : orders) {
+            if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
+                    || order.getDateOfOrder().equals(startDate)) {
+                customerPointsEarnedFeb += pointsEarnedForOrder(order.getTotalAmount());
+            }
+
+        }
+        return customerPointsEarnedFeb;
 
 
+    }
 }
