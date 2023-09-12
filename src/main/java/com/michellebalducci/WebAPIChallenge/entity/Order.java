@@ -12,8 +12,8 @@ import java.util.UUID;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID orderId;
     @Column
     private UUID customerId;
     @Column
@@ -22,7 +22,10 @@ public class Order {
     private Calendar dateOfOrder;
 
 
-    public Order(){};
+    public Order() {
+    }
+
+    ;
 
     public Order(UUID customerId, double totalAmount, Calendar dateOfOrder) {
         this.customerId = customerId;
@@ -30,7 +33,7 @@ public class Order {
         this.dateOfOrder = dateOfOrder;
     }
 
-    public Order( double totalAmount, Calendar dateOfOrder) {
+    public Order(double totalAmount, Calendar dateOfOrder) {
         this.totalAmount = totalAmount;
         this.dateOfOrder = dateOfOrder;
     }
@@ -67,19 +70,37 @@ public class Order {
     }
 
 
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return customerId == order.customerId && Double.compare(order.totalAmount, totalAmount) == 0  && Objects.equals(dateOfOrder, order.dateOfOrder);
+        return customerId == order.customerId && Double.compare(order.totalAmount, totalAmount) == 0 && Objects.equals(dateOfOrder, order.dateOfOrder);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(customerId, totalAmount, dateOfOrder);
+    }
+
+
+    public UUID compare(Order o1, Order o2) {
+        UUID customerId1= o1.getCustomerId();
+        UUID customerId2= o2.getCustomerId();
+        return compare(o1.getCustomerId(),o2.getCustomerId());
+    }
+
+    private static UUID compare(UUID customerId, UUID customerId1) {
+        return customerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", customerId=" + customerId +
+                ", totalAmount=" + totalAmount +
+                ", dateOfOrder=" + dateOfOrder +
+                '}';
     }
 }
