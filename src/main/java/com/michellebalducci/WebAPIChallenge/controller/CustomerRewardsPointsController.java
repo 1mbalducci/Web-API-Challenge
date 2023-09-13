@@ -4,6 +4,7 @@ import com.michellebalducci.WebAPIChallenge.entity.Customer;
 import com.michellebalducci.WebAPIChallenge.entity.Order;
 import com.michellebalducci.WebAPIChallenge.repository.CustomerRepository;
 import com.michellebalducci.WebAPIChallenge.repository.OrderRepository;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,25 +37,15 @@ public class CustomerRewardsPointsController {
     @GetMapping("/rewards/allCustomers")
     public ResponseEntity<List<CustomerRewardsPointsDTO>> loadRewardsAllCustomers() {
         List<Order> listOrders = orderRepository.findAll();
-        List<CustomerRewardsPointsDTO> listOfCustomerRewardsPointsDTO= new ArrayList<>();
-        Map<UUID,List<Order>>sortedCustomerList =sortOrdersByCustomerId(listOrders);
-
-
-
-
-git
+        List<Customer> listCustomers = customerRepository.findAll();
+        List<CustomerRewardsPointsDTO> listOfCustomerRewardsPointsDTO = new ArrayList<>();
         CustomerRewardsPointsDTO newCustomerRewardsPointsDTO = new CustomerRewardsPointsDTO();
-        for (Order order: listOrders) {
+        Map<UUID, List<Order>> sortedCustomerList = sortOrdersByCustomerId(listOrders);
 
-            int totalPointsEarned = calculateTotalPointsPerCustomer(listOrders);
-            int janRewardsPoints= calculatePointsJanuary(listOrders);
-            int februaryRewardsPoints = calculatePointsFebruary(listOrders);
-            int marchRewardsPoints = calculatePointsMarch(listOrders);
 
-            newCustomerRewardsPointsDTO.setTotalPointsPerCustomer(totalPointsEarned);
-            newCustomerRewardsPointsDTO.setCustomerPointsEarnedJan(janRewardsPoints);
-            newCustomerRewardsPointsDTO.setCustomerPointsEarnedFeb(februaryRewardsPoints);
-            newCustomerRewardsPointsDTO.setCustomerPointsEarnedMar(marchRewardsPoints);
+
+
+
 
 
             listOfCustomerRewardsPointsDTO.add(newCustomerRewardsPointsDTO);
@@ -64,4 +55,6 @@ git
         return ResponseEntity.status(HttpStatus.OK).body(listOfCustomerRewardsPointsDTO);
 
     }
+
+
 }

@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public interface RewardsService {
 
-    Optional<Customer> getByIdCustomer(UUID id);
+    Optional<Customer> getCustomerById(UUID id);
     Optional <Order> getByIdOrder(UUID id);
     List<Order> findAllOrders();
 
