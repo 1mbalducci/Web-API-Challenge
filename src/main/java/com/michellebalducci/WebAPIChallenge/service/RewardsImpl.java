@@ -21,11 +21,17 @@ public class RewardsImpl implements RewardsService {
     }
 
     @Override
-    public Optional<Customer> getCustomerById(@NotNull UUID id) {return customerRepository.findById(id);}
+    public Customer getCustomerById(@NotNull UUID id) {
+        Optional<Customer> optionalCustomer=customerRepository.findById(id);
+        Customer customerEntity= optionalCustomer.get();
+        return customerEntity;
+    }
 
     @Override
-    public  Optional<Order> getByIdOrder(@NotNull UUID id) {
-        return orderRepository.findById(id);
+    public  Order getByIdOrder(@NotNull UUID id) {
+        Optional<Order> optionalOrder=orderRepository.findById(id);
+        Order orderEntity= optionalOrder.get();
+        return orderEntity;
     }
 
     @Override
@@ -39,8 +45,8 @@ public class RewardsImpl implements RewardsService {
 //        String customerLastName= lastName;
 //        return customerRepository.findBy(customerFirstName, customerLastName);
 
-
-    public static Map<UUID,List<Order>> sortOrdersByCustomerId (List <Order> orders){
+    @Override
+    public  Map<UUID,List<Order>> sortOrdersByCustomerId (List <Order> orders){
         Map<UUID, List<Order>> sortedlistCustomers = new HashMap<>();
         for (Order order : orders) {
             if (!sortedlistCustomers.containsKey(order.getCustomerId())) {
@@ -51,7 +57,7 @@ public class RewardsImpl implements RewardsService {
         return sortedlistCustomers;
     };
 
-    public static int pointsEarnedForOrder(double totalAmount) {
+    public int pointsEarnedForOrder(double totalAmount) {
         int pointsEarnedForOrder = 0;
         if (totalAmount > 100) {
             pointsEarnedForOrder += ((totalAmount - 100) * 2) + 50;
@@ -61,21 +67,16 @@ public class RewardsImpl implements RewardsService {
         }
         return pointsEarnedForOrder;
     }
-
-
-
-    public static int calculateTotalPointsPerCustomer(Order order) {
+    public int calculateTotalPointsPerCustomer(Order order) {
         int totalPointsEarned = 0;
 //        for (Order order : orders) {
 //            if (order.getCustomerId() == customer.getCustomerID()) {
                 totalPointsEarned += pointsEarnedForOrder(order.getTotalAmount());
 //            }
-
 //        }
         return totalPointsEarned;
     }
-
-    public static int calculatePointsJanuary(Order order) {
+    public int calculatePointsJanuary(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         startDate.set(2022, Calendar.JANUARY, 1);
@@ -86,15 +87,11 @@ public class RewardsImpl implements RewardsService {
                     || order.getDateOfOrder().equals(startDate)) {
                 customerPointsEarnedJan += pointsEarnedForOrder(order.getTotalAmount());
             }
-
 //        }
         return customerPointsEarnedJan;
 
     }
-
-    ;
-
-    public static int calculatePointsFebruary(Order order) {
+    public int calculatePointsFebruary(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         startDate.set(2022, Calendar.FEBRUARY, 1);
@@ -109,7 +106,7 @@ public class RewardsImpl implements RewardsService {
         return customerPointsEarnedFeb;
     };
 
-    public static int calculatePointsMarch(Order order) {
+    public int calculatePointsMarch(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         startDate.set(2022, Calendar.MARCH, 1);
@@ -120,11 +117,10 @@ public class RewardsImpl implements RewardsService {
                     || order.getDateOfOrder().equals(startDate)) {
                 customerPointsEarnedFeb += pointsEarnedForOrder(order.getTotalAmount());
             }
-
 //        }
         return customerPointsEarnedFeb;
     }
-
+    @Override
     public  List <CustomerRewardsPointsDTO> createCustomerRewardsPointsDTO (Map<UUID, List<Order>> sortedCustomer){
         int totalPointsEarned = 0;
         int janRewardsPoints = 0;
@@ -135,17 +131,13 @@ public class RewardsImpl implements RewardsService {
             CustomerRewardsPointsDTO newDTO = new CustomerRewardsPointsDTO();
             for (Order order : sortedCustomer.get(key)) {
                 if (newDTO.getFirstName()==null) {
-                    UUID customerId= order.getCustomerId();
-                    Optional<Customer> optionalCustomer = getCustomerById(customerId);
-                    Customer customerEntity = optionalCustomer.get();
-                    String firstName = customerEntity.getFirstName();
+                    Customer customer = getCustomerById(order.getCustomerId());;
+                    String firstName = customer.getFirstName();
                     newDTO.setFirstName(firstName);
                 }
                 if (newDTO.getLastName()==null) {
-                    UUID customerId= order.getCustomerId();
-                    Optional<Customer> optionalCustomer = getCustomerById(customerId);
-                    Customer customerEntity = optionalCustomer.get();
-                    String lastName = customerEntity.getLastName();
+                    Customer customer = getCustomerById(order.getCustomerId());
+                    String lastName = customer.getLastName();
                     newDTO.setFirstName(lastName);
                 }
                 totalPointsEarned += pointsEarnedForOrder(order.getTotalAmount());
