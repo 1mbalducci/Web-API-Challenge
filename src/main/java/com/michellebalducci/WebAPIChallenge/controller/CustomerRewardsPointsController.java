@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class CustomerRewardsPointsController {
     CustomerRepository customerRepository;
     @Autowired
     OrderRepository orderRepository;
+
     RewardsService rewardsService;
 
     public CustomerRewardsPointsController(CustomerRepository customerRepository, OrderRepository orderRepository,RewardsService rewardsService) {
@@ -39,14 +41,9 @@ public class CustomerRewardsPointsController {
     @GetMapping("/rewards/allCustomers")
     public ResponseEntity<List<CustomerRewardsPointsDTO>> loadRewardsAllCustomers() {
         List<Order> listOrders = orderRepository.findAll();
-        List<Customer> listCustomers = customerRepository.findAll();
-
-        CustomerRewardsPointsDTO newCustomerRewardsPointsDTO = new CustomerRewardsPointsDTO();
+        List<Customer> listCustomers= customerRepository.findAll();
         Map<UUID, List<Order>> sortedCustomerList = rewardsService.sortOrdersByCustomerId(listOrders);
         List<CustomerRewardsPointsDTO> listOfCustomerRewardsPointsDTO =rewardsService.createCustomerRewardsPointsDTO(sortedCustomerList);
         return ResponseEntity.status(HttpStatus.OK).body(listOfCustomerRewardsPointsDTO);
-
     }
-
-
 }

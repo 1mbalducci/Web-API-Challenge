@@ -7,13 +7,15 @@ import com.michellebalducci.WebAPIChallenge.repository.CustomerRepository;
 import com.michellebalducci.WebAPIChallenge.repository.OrderRepository;
 import com.sun.istack.NotNull;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class RewardsImpl implements RewardsService {
-    //private static final Logger LOG = LoggerFactory.getLogger(RewardsImpl.class);
     private final CustomerRepository customerRepository;
     private final OrderRepository orderRepository;
+
 
     public RewardsImpl(CustomerRepository customerRepository, OrderRepository orderRepository) {
         this.customerRepository = customerRepository;
@@ -39,12 +41,6 @@ public class RewardsImpl implements RewardsService {
         return orderRepository.findAll();
     }
 
-//    @Override
-//    public List<Customer> findByName(@NotNull String firstName, @NotNull String lastName) {
-//        String customerFirstName= firstName;
-//        String customerLastName= lastName;
-//        return customerRepository.findBy(customerFirstName, customerLastName);
-
     @Override
     public  Map<UUID,List<Order>> sortOrdersByCustomerId (List <Order> orders){
         Map<UUID, List<Order>> sortedlistCustomers = new HashMap<>();
@@ -67,57 +63,49 @@ public class RewardsImpl implements RewardsService {
         }
         return pointsEarnedForOrder;
     }
+
     public int calculateTotalPointsPerCustomer(Order order) {
         int totalPointsEarned = 0;
-//        for (Order order : orders) {
-//            if (order.getCustomerId() == customer.getCustomerID()) {
                 totalPointsEarned += pointsEarnedForOrder(order.getTotalAmount());
-//            }
-//        }
         return totalPointsEarned;
     }
+
     public int calculatePointsJanuary(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        startDate.set(2022, Calendar.JANUARY, 1);
-        endDate.set(2022, Calendar.FEBRUARY, 1);
+        startDate.set(2023, Calendar.JANUARY, 1);
+        endDate.set(2023, Calendar.FEBRUARY, 1);
         int customerPointsEarnedJan = 0;
-//        for (Order order : orders) {
             if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
                     || order.getDateOfOrder().equals(startDate)) {
-                customerPointsEarnedJan += pointsEarnedForOrder(order.getTotalAmount());
+                customerPointsEarnedJan = pointsEarnedForOrder(order.getTotalAmount());
             }
-//        }
         return customerPointsEarnedJan;
 
     }
     public int calculatePointsFebruary(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        startDate.set(2022, Calendar.FEBRUARY, 1);
-        endDate.set(2022, Calendar.MARCH, 1);
-        int customerPointsEarnedFeb = 0;
-//        for (Order order : orders) {
+        startDate.set(2023, Calendar.FEBRUARY, 1);
+        endDate.set(2023, Calendar.MARCH, 1);
+      int customerPointsEarnedFeb = 0;
             if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
                     || order.getDateOfOrder().equals(startDate)) {
-                customerPointsEarnedFeb += pointsEarnedForOrder(order.getTotalAmount());
+                customerPointsEarnedFeb= pointsEarnedForOrder(order.getTotalAmount());
             }
-//        }
         return customerPointsEarnedFeb;
     };
 
     public int calculatePointsMarch(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        startDate.set(2022, Calendar.MARCH, 1);
-        endDate.set(2022, Calendar.FEBRUARY, 1);
+        startDate.set(2023, Calendar.MARCH, 1);
+        endDate.set(2023, Calendar.FEBRUARY, 1);
         int customerPointsEarnedFeb = 0;
-//        for (Order order : orders) {
             if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
                     || order.getDateOfOrder().equals(startDate)) {
-                customerPointsEarnedFeb += pointsEarnedForOrder(order.getTotalAmount());
+                customerPointsEarnedFeb = pointsEarnedForOrder(order.getTotalAmount());
             }
-//        }
         return customerPointsEarnedFeb;
     }
     @Override
@@ -138,7 +126,10 @@ public class RewardsImpl implements RewardsService {
                 if (newDTO.getLastName()==null) {
                     Customer customer = getCustomerById(order.getCustomerId());
                     String lastName = customer.getLastName();
-                    newDTO.setFirstName(lastName);
+                    newDTO.setLastName(lastName);
+                }
+                if (newDTO.getCustomerId()==null) {
+                    newDTO.setCustomerId(order.getCustomerId());
                 }
                 totalPointsEarned += pointsEarnedForOrder(order.getTotalAmount());
                 janRewardsPoints += calculatePointsJanuary(order);
@@ -150,7 +141,6 @@ public class RewardsImpl implements RewardsService {
             newDTO.setCustomerPointsEarnedFeb(februaryRewardsPoints);
             newDTO.setCustomerPointsEarnedMar(marchRewardsPoints);
             listOfCustomerDTO.add(newDTO);
-
         }
         return listOfCustomerDTO;
     }

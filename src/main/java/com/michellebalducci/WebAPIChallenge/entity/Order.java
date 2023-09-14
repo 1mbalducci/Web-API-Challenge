@@ -21,12 +21,7 @@ public class Order {
     @Column
     private Calendar dateOfOrder;
 
-
-    public Order() {
-    }
-
-    ;
-
+    public Order() {}
     public Order(UUID customerId, double totalAmount, Calendar dateOfOrder) {
         this.customerId = customerId;
         this.totalAmount = totalAmount;
@@ -37,17 +32,6 @@ public class Order {
         this.totalAmount = totalAmount;
         this.dateOfOrder = dateOfOrder;
     }
-
-//        public static void calculatePointsPerOrder(double totalAmount){
-//                if (totalAmount>100){
-//                    pointsEarnedForOrder+= ((totalAmount-100)*2)+50;
-//                }
-//                if (totalAmount>50 && totalAmount<=100){
-//                    pointsEarnedForOrder+= (totalAmount-50)*1;
-//                }
-//                };
-
-
     public UUID getCustomerId() {
         return customerId;
     }
@@ -77,23 +61,10 @@ public class Order {
         Order order = (Order) o;
         return customerId == order.customerId && Double.compare(order.totalAmount, totalAmount) == 0 && Objects.equals(dateOfOrder, order.dateOfOrder);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(customerId, totalAmount, dateOfOrder);
     }
-
-
-    public UUID compare(Order o1, Order o2) {
-        UUID customerId1= o1.getCustomerId();
-        UUID customerId2= o2.getCustomerId();
-        return compare(o1.getCustomerId(),o2.getCustomerId());
-    }
-
-    private static UUID compare(UUID customerId, UUID customerId1) {
-        return customerId;
-    }
-
     @Override
     public String toString() {
         return "Order{" +

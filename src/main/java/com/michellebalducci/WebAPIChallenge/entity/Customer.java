@@ -16,7 +16,6 @@ public class Customer {
     private  String lastName;
     @Column
     private String firstName;
-//    @OneToMany
     ArrayList<Order> orders;
 
 
@@ -30,20 +29,6 @@ public class Customer {
         this.firstName = firstName;
         this.orders = orders;
     }
-
-    public Customer(String lastName, String firstName, ArrayList<Order> orders,
-                    int totalPointsEarned, int pointsEarnedJan, int pointsEarnedFeb,
-                    int pointsEarnedMar) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.orders = orders;
-
-    }
-
-
-
-
-
 
     public String getLastName() {
         return lastName;

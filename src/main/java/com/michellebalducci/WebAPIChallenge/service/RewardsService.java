@@ -16,7 +16,6 @@ public interface RewardsService {
     Map<UUID,List<Order>> sortOrdersByCustomerId (List <Order> orders);
     List <CustomerRewardsPointsDTO> createCustomerRewardsPointsDTO (Map<UUID, List<Order>> sortedCustomer);
 
-//    List<Customer> findByName(@NotNull String firstName, @NotNull String lastName);
 
 
 }
