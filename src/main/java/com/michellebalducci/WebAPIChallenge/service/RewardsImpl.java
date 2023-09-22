@@ -73,8 +73,8 @@ public class RewardsImpl implements RewardsService {
     public int calculatePointsJanuary(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        startDate.set(2023, Calendar.JANUARY, 1);
-        endDate.set(2023, Calendar.FEBRUARY, 1);
+        startDate.set(2023, Calendar.JANUARY, 1,0,0,0);
+        endDate.set(2023, Calendar.FEBRUARY, 1,0,0,0);
         int customerPointsEarnedJan = 0;
             if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
                     || order.getDateOfOrder().equals(startDate)) {
@@ -86,8 +86,8 @@ public class RewardsImpl implements RewardsService {
     public int calculatePointsFebruary(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        startDate.set(2023, Calendar.FEBRUARY, 1);
-        endDate.set(2023, Calendar.MARCH, 1);
+        startDate.set(2023, Calendar.FEBRUARY, 1,0,0,0);
+        endDate.set(2023, Calendar.MARCH, 1,0,0,0);
       int customerPointsEarnedFeb = 0;
             if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
                     || order.getDateOfOrder().equals(startDate)) {
@@ -99,14 +99,20 @@ public class RewardsImpl implements RewardsService {
     public int calculatePointsMarch(Order order) {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        startDate.set(2023, Calendar.MARCH, 1);
-        endDate.set(2023, Calendar.FEBRUARY, 1);
+        startDate.set(2023, Calendar.MARCH, 1,0,0,0);
+        endDate.set(2023, Calendar.APRIL, 1,0,0,0);
         int customerPointsEarnedFeb = 0;
             if (order.getDateOfOrder().before(endDate) && order.getDateOfOrder().after(startDate)
                     || order.getDateOfOrder().equals(startDate)) {
                 customerPointsEarnedFeb = pointsEarnedForOrder(order.getTotalAmount());
             }
         return customerPointsEarnedFeb;
+    }
+
+
+    public Map<String , Integer> sortOrdersByMonth(Map<UUID, List<Order>> sortedCustomer ){
+        Map<String, Integer> sortedByMonth= new HashMap<>();
+        return sortedByMonth;
     }
     @Override
     public  List <CustomerRewardsPointsDTO> createCustomerRewardsPointsDTO (Map<UUID, List<Order>> sortedCustomer){

@@ -58,7 +58,7 @@ public class CustomerRewardsPointsDTO {
     }
 
     public void setCustomerPointsEarnedJan(int customerPointsEarnedJan) {
-        customerPointsEarnedJan = customerPointsEarnedJan;
+        this.customerPointsEarnedJan = customerPointsEarnedJan;
     }
 
     public int getCustomerPointsEarnedFeb() {
@@ -66,7 +66,7 @@ public class CustomerRewardsPointsDTO {
     }
 
     public void setCustomerPointsEarnedFeb(int customerPointsEarnedFeb) {
-        customerPointsEarnedFeb = customerPointsEarnedFeb;
+        this.customerPointsEarnedFeb = customerPointsEarnedFeb;
     }
 
     public int getCustomerPointsEarnedMar() {
@@ -74,7 +74,7 @@ public class CustomerRewardsPointsDTO {
     }
 
     public void setCustomerPointsEarnedMar(int customerPointsEarnedMar) {
-        customerPointsEarnedMar = customerPointsEarnedMar;
+        this.customerPointsEarnedMar = customerPointsEarnedMar;
     }
 
     @Override
