@@ -112,6 +112,12 @@ public class RewardsImpl implements RewardsService {
 
     public Map<String , Integer> sortOrdersByMonth(Map<UUID, List<Order>> sortedCustomer ){
         Map<String, Integer> sortedByMonth= new HashMap<>();
+        //finds customer ID
+        //goes through each order in the array of orders
+        //checks the month of the order
+        //caluclate the points of the order
+        //if that month does not exist as a key, add the key
+        //if the key exists add the value to the value stored
         return sortedByMonth;
     }
     @Override
