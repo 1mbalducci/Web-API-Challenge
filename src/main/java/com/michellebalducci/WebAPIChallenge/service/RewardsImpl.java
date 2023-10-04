@@ -117,7 +117,7 @@ public class RewardsImpl implements RewardsService {
         //checks the month of the order
         //calculate the points of the order
         //if that month does not exist as a key- add the key
-        //if the key exists add the value to the value stored (use += )
+        //if the key exists add the value to the value stored (use +=. )
         return sortedByMonth;
     }
     @Override
